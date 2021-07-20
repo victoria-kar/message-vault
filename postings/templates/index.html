@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'lib/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Message Vault</title>
+  </head>
+  <body>
+    <header id="header">
+      <div class="container">
+        <div id="logo" class="pull-left">
+          <a href="{% url 'index' %}">
+            <img
+              src="{% static 'img/Logo-White-High-Res.png' %}"
+              alt="eusa logo"
+            />
+          </a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section id="main">
+        <div class="container">
+          <div class="section-header">
+            <h1>Welcome to the Message Vault!</h1>
+            <p>
+              Please enter the message that you would like to save in the form
+              below.
+            </p>
+          </div>
+          <div class="row justify-content-center section-form">
+            <div class="col-lg-5 col-md-8">
+              <section>
+                {% if is_posted%}
+                <div
+                  class="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
+                  <strong>Well done!</strong> You successfully added a message.
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                {% endif %}
+              </section>
+              <form method="post" class="row needs-validation" novalidate>
+                {% for field in form %}
+                <div class="mb-3">
+                  <label for="{{field.id_for_label}}" class="form-label"
+                    >{{field.label}}</label
+                  >
+                  {{field}}
+                  <div class="invalid-feedback">Please fill in the form.</div>
+                </div>
+                {% endfor %} {% csrf_token %}
+                <div class="col-12 text-center">
+                  <button class="btn btn-primary submit-button" type="submit">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="container section-footer">
+          <h2>
+            Check what other people wrote:
+            <a href="{% url 'allmessages' %}">All Messages</a>
+          </h2>
+        </div>
+      </section>
+    </main>
+    <footer id="footer">
+      <div class="container">
+        <div>Made by Viktorija Karavackaja</div>
+      </div>
+    </footer>
+    <!-- #footer -->
+    <script src="{% static 'lib/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'lib/js/main.js' %}"></script>
+  </body>
+</html>

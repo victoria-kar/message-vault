@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'lib/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Message Vault</title>
+  </head>
+  <body>
+    <header id="header">
+      <div class="container">
+        <div id="logo" class="pull-left">
+          <a href="{% url 'index' %}">
+            <img
+              src="{% static 'img/Logo-White-High-Res.png' %}"
+              alt="eusa logo"
+            />
+          </a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section id="main">
+        <div class="container">
+          {% for message in messages%}
+          <div class="card single-message">
+            <div class="card-body">
+              <h5 class="card-title">{{message.username}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted single-message-date">
+                {{message.created_at|date:"D d M Y H:i"}}
+              </h6>
+              <p class="card-text">{{message.message}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+    <footer id="footer">
+      <div class="container">
+        <div>Made by Viktorija Karavackaja</div>
+      </div>
+    </footer>
+  </body>
+</html>
